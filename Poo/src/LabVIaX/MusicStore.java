@@ -7,16 +7,25 @@ public class MusicStore {
 	private String owner = "sem dono";
 	private int openTime;
 	private int closeTime;
+	private MusicTitle[] titlesStore;
 	
     public MusicStore() {
-        this.openTime = 9;  
-        this.closeTime = 21; 
+ 
     }
 	
+	public MusicStore(String owner) {
+		this.owner = owner;
+		this.titlesStore = null;
+	}
+	
+	@Override
+	public String toString() {
+		return "[Dono = " + owner + ", Abre = " + openTime + ", Fecha = " + closeTime + "]";
+	}
+
 	public void displayHoursOfOperation() {
-		System.out.println("Período: \n");
-		System.out.println(getOpenClosedMessage());
-		System.out.println("\nDiariamente das 9:00 - 21:00");
+		System.out.println("Período:");
+		System.out.println(this.toString());
 	}
 	
     public boolean isOpen() {
@@ -33,6 +42,18 @@ public class MusicStore {
 		return c.get(Calendar.HOUR_OF_DAY); 
 		} 
 
+    public void displayMusicTitles() {
+        if (titlesStore == null) {
+            System.out.println("Não há títulos de música disponíveis.");
+            return;
+        }else {
+        	for (int i = 0; i < titlesStore.length; i++) {
+                System.out.println("Título " + (i + 1) + ":");
+                System.out.println("Título: " + titlesStore[i].getTitle());
+                System.out.println("Artista: " + titlesStore[i].getArtist());
+            }
+        }
+    }
 	
 	public void setOwner(String owner) {
 		this.owner = owner;
@@ -56,6 +77,14 @@ public class MusicStore {
 
 	public void setCloseTime(int closeTime) {
 		this.closeTime = closeTime;
+	}
+
+	public MusicTitle[] getTitlesStore() {
+		return titlesStore;
+	}
+
+	public void setTitlesStore(MusicTitle[] titlesStore) {
+		this.titlesStore = titlesStore;
 	}
 	
 }
